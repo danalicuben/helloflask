@@ -1,0 +1,17 @@
+<html>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<title>Hello Flask Index Page</title>
+<ul>
+	<li><a href="/hello">/hello</a></li>
+	<li><a href="/hello/flask">/hello/flask</a></li>
+	<li><a href="/slash">/slash</a></li>
+	<li><a href="/slash/">/slash/</a></li>
+	<li><a href="/arg/abc">/arg/abc</a></li>
+	<li><a href="/arg/abc?foo=bar">/arg/abc?foo</a></li>
+	<li><a href="/test_url_for">url_for('show_arg', name='abc', foo='bar')</a></li>
+	<li><a href="/method">/method</a></li>
+	<li><a href="/safe">/safe</a></li>
+</ul>
+<hr/>
+<img src="/static/python-logo.gif"/>
+</html>

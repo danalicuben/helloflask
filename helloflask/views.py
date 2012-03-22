@@ -12,7 +12,7 @@ def before_request2():
 
 @app.route('/')
 def index():
-   return 'Index page'
+   return render_template('index.html')
 
 
 @app.route('/hello/')
@@ -24,9 +24,9 @@ def hello(name=None):
 def slash():
     return 'Slash'
    
-@app.route('/user/<username>')
-def show_user_profile(username):
-    return 'Show User Profile %s - %s' % (username, request.args.get('foo', 'no arg foo'))
+@app.route('/arg/<name>')
+def show_arg(name):
+    return 'Show args %s - %s' % (name, request.args.get('foo', 'no arg foo'))
    
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
@@ -34,7 +34,7 @@ def show_post(post_id):
    
 @app.route('/test_url_for')
 def test_url_for():
-    return url_for('show_user_profile', username='Bryan', foo='bar')
+    return url_for('show_arg', name='abc', foo='bar')
    
 @app.route('/method', methods=['GET', 'POST'])
 def methods():
