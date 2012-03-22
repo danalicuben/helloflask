@@ -1,17 +1,31 @@
 <html>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 <title>Hello Flask Index Page</title>
-<ul>
-	<li><a href="/hello">/hello</a></li>
-	<li><a href="/hello/flask">/hello/flask</a></li>
-	<li><a href="/slash">/slash</a></li>
-	<li><a href="/slash/">/slash/</a></li>
-	<li><a href="/arg/abc">/arg/abc</a></li>
-	<li><a href="/arg/abc?foo=bar">/arg/abc?foo</a></li>
-	<li><a href="/test_url_for">url_for('show_arg', name='abc', foo='bar')</a></li>
-	<li><a href="/method">/method</a></li>
-	<li><a href="/safe">/safe</a></li>
-</ul>
-<hr/>
-<img src="/static/python-logo.gif"/>
+<body>
+	<h1>Index Page</h1>
+	<ul>
+		<li><a href="/hello">/hello</a></li>
+		<li><a href="/hello/flask">/hello/flask</a></li>
+		<li><a href="/slash">/slash</a></li>
+		<li><a href="/slash/">/slash/</a></li>
+		<li><a href="/arg/abc">/arg/abc</a></li>
+		<li><a href="/arg/abc?foo=bar">/arg/abc?foo</a></li>
+		<li><a href="/test_url_for">url_for('show_arg', name='abc', foo='bar')</a></li>
+		<li><a href="/method">/method</a></li>
+		<li><a href="/safe">/safe</a></li>
+	</ul>
+	<hr/>
+
+	<a href="http://python.org/"><img
+	   src="/static/python-logo.gif"
+	   border="0"
+	   alt="Python"
+	   title="Python"></a>
+
+	<a href="http://flask.pocoo.org/"><img
+	   src="/static/flask-powered.png"
+	   border="0"
+	   alt="Flask powered"
+	   title="Flask powered"></a>
+<body>
 </html>
