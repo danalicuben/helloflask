@@ -1,6 +1,8 @@
 <html>
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-<title>Hello Flask Index Page</title>
+<head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Hello Flask Index Page</title>
+</head>
 <body>
 	<h1>Index Page</h1>
 	<ul>
@@ -13,6 +15,8 @@
 		<li><a href="/test_url_for">url_for('show_arg', name='abc', foo='bar')</a></li>
 		<li><a href="/method">/method</a></li>
 		<li><a href="/safe">/safe</a></li>
+		<li><a href="/maps/demo">/maps/demo</a></li>
+		<li><a href="/maps/london">/maps/london</a></li>
 	</ul>
 	<hr/>
 
