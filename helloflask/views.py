@@ -1,4 +1,4 @@
-from flask import url_for, request, render_template, Markup
+from flask import url_for, request, render_template, Markup, abort
 from helloflask import app
 
 
@@ -60,4 +60,10 @@ def map_demo_openlayers():
 
 @app.route('/maps/london')
 def map_london_openlayers():
-    return render_template('map_london_openlayers.html')  
+    library = request.args.get('library')
+    if library == 'openlayers':
+        return render_template('map_london_openlayers.html')  
+    if library == 'leaflet':
+        return render_template('map_london_leaflet.html') 
+    abort(404) 
+
