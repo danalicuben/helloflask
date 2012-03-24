@@ -15,14 +15,12 @@
 	<script src="http://code.leafletjs.com/leaflet-0.3.1/leaflet.js"></script>
 	<script>
 		var map = new L.Map('map');
+	    var tiles = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18});
 
-		var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/cc6d97579a564b67b6fa4ab02d0eb4c3/997/256/{z}/{x}/{y}.png',
-			cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18});
-
-		map.setView(new L.LatLng(51.505, -0.09), 13).addLayer(cloudmade);
+		map.setView(new L.LatLng(51.505, -0.09), 13).addLayer(tiles);
 
 
-		var markerLocation = new L.LatLng(51.505, -0.09),
+		var markerLocation = new L.LatLng(51.5, -0.09),
 			marker = new L.Marker(markerLocation);
 
 		map.addLayer(marker);
