@@ -1,0 +1,14 @@
+<html>
+<head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Versions</title>
+</head>
+<body>
+	<h1>Versions</h1>
+	<ul>
+	{% for v in versions %}
+		<li>{{ v.0 }} {{ v.1 }}</li>
+	{% endfor %}
+	</ul>
+</body>
+</html>

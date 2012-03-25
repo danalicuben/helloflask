@@ -1,4 +1,6 @@
-from flask import url_for, request, render_template, Markup, abort
+import sys
+
+from flask import url_for, request, render_template, Markup, abort, __version__
 from helloflask import app
 
 
@@ -67,3 +69,9 @@ def map_london_openlayers():
         return render_template('map_london_leaflet.html') 
     abort(404) 
 
+
+@app.route('/versions')
+def versions():
+    v = [('Python', sys.version.split()[0]),
+         ('Flask', __version__)]
+    return render_template('versions.html', versions=v)
