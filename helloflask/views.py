@@ -1,6 +1,6 @@
 import sys
 
-from flask import url_for, request, render_template, Markup, abort, __version__
+from flask import url_for, request, render_template, Markup, abort
 from helloflask import app
 
 
@@ -72,6 +72,13 @@ def map_london_openlayers():
 
 @app.route('/versions')
 def versions():
+    import boto
+    import flask
+    import jinja2
+    import werkzeug
     v = [('Python', sys.version.split()[0]),
-         ('Flask', __version__)]
+         ('Flask', flask.__version__),
+         ('Jinja2', jinja2.__version__),
+         ('Werkzeug', werkzeug.__version__),
+         ('Boto', boto.__version__)]
     return render_template('versions.html', versions=v)

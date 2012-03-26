@@ -5,10 +5,11 @@
 </head>
 <body>
 	<h1>Versions</h1>
-	<ul>
+	<table border="1">
+	<tr><th>Module</th><th>Version</th></tr>
 	{% for v in versions %}
-		<li>{{ v.0 }} {{ v.1 }}</li>
+		<tr><td>{{ v.0 }}</td><td>{{ v.1 }}</td></tr>
 	{% endfor %}
-	</ul>
+	</table>
 </body>
 </html>

@@ -1,2 +1,4 @@
-flask
-
+Flask==0.8
+Jinja2==2.6
+Werkzeug==0.8.3
+boto==2.3.0
