@@ -1,8 +1,10 @@
 import sys
 
+from boto.dynamodb.exceptions import DynamoDBKeyNotFoundError
 from flask import url_for, request, render_template, Markup, abort
 from helloflask import app
 
+import settings
 
 @app.before_request
 def before_request1():
@@ -82,3 +84,48 @@ def versions():
          ('Werkzeug', werkzeug.__version__),
          ('Boto', boto.__version__)]
     return render_template('versions.html', versions=v)
+
+
+@app.route('/dynamodb/<key>')
+def set_dynamodb(key):
+    method = request.args.get('_method')
+    name = request.args.get('name')
+    value = request.args.get('value')
+  
+    if request.method == 'PUT' or method == 'PUT':
+        if name and value:
+            try:
+                item = settings.DYNAMODB_TABLE_HELLOFLASK.get_item(key)
+            except DynamoDBKeyNotFoundError:
+                item = settings.DYNAMODB_TABLE_HELLOFLASK.new_item(key)
+
+            item[name] = value
+            item.put()
+            return 'SET item={}, name={}, value={}'.format(key, name, value)
+        else:
+            abort(400)
+    elif request.method == 'DELETE' or method == 'DELETE':
+        if key:
+            try:
+                item = settings.DYNAMODB_TABLE_HELLOFLASK.get_item(key)
+            except DynamoDBKeyNotFoundError:
+                return "Item '{}' not found".format(key)
+            else:
+                item.delete()
+                return 'DELETED item={}'.format(key)
+        else:
+            abort(400)
+    elif request.method == 'GET':
+        if key:
+            try:
+                item = settings.DYNAMODB_TABLE_HELLOFLASK.get_item(key)
+            except DynamoDBKeyNotFoundError:
+                return "Item '{}' not found".format(key)
+            else:
+                d = dict(item)
+                del d['name']
+                return 'Item={}, {}'.format(key, d)
+        else:
+            abort(400)
+    else:
+        return '???'
