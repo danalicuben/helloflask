@@ -137,10 +137,10 @@ def set_dynamodb(key):
 @app.route('/mailbox/echo', methods=['POST'])
 def mailbox_echo():
     data = urllib.urlencode({
-                 "from": 'echo@helloflask.mailgun.org',
-                 "to": request.form.get('from')
-                 "subject": request.form.get('subject')
-                 "text": request.form.get('stripped-text')
+                 'from': 'echo@helloflask.mailgun.org',
+                 'to': request.form.get('from'),
+                 'subject': request.form.get('subject'),
+                 'text': request.form.get('stripped-text')
                  })
 
     request = urllib2.Request('https://api.mailgun.net/v2/helloflask.mailgun.org/messages')
