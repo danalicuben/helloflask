@@ -133,4 +133,9 @@ def set_dynamodb(key):
 @app.route('/mailbox/echo', methods=['GET', 'POST'])
 def mailbox_echo():
     print '{}\n{}\n{}\n---\n'.format(request.method, request.args, request.data)
+    print request.form
+    print 'recipient', request.form.get('recipient')
+    print 'from', request.form.get('from')
+    print 'subject', request.form.get('subject')
+    print 'stripped-text', request.form.get('stripped-text')
     return ''
