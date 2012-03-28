@@ -128,3 +128,10 @@ def set_dynamodb(key):
             abort(400)
     else:
         return '???'
+
+
+@app.route('/mailbox/echo')
+def mailbox_echo():
+    msg = '{}\n{}\n{}\n---\n'.format(request.method, request.args, request.data)n
+    open('~/data/echo', 'a').write(msg)
+    return
