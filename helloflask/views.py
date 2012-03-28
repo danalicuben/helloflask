@@ -1,4 +1,8 @@
 import sys
+import urllib
+import urllib2
+import base64
+
 
 from boto.dynamodb.exceptions import DynamoDBKeyNotFoundError
 from flask import url_for, request, render_template, Markup, abort
@@ -130,12 +134,17 @@ def set_dynamodb(key):
         return '???'
 
 
-@app.route('/mailbox/echo', methods=['GET', 'POST'])
+@app.route('/mailbox/echo', methods=['POST'])
 def mailbox_echo():
-    print '{}\n{}\n{}\n---\n'.format(request.method, request.args, request.data)
-    print request.form
-    print 'recipient', request.form.get('recipient')
-    print 'from', request.form.get('from')
-    print 'subject', request.form.get('subject')
-    print 'stripped-text', request.form.get('stripped-text')
+    data = urllib.urlencode({
+                 "from": 'echo@helloflask.mailgun.org',
+                 "to": request.form.get('from')
+                 "subject": request.form.get('subject')
+                 "text": request.form.get('stripped-text')
+                 })
+
+    request = urllib2.Request('https://api.mailgun.net/v2/helloflask.mailgun.org/messages')
+    base64string = base64.encodestring('%s:%s' % ('api', settings.MAILGUN_KEY)).replace('\n', '')
+    request.add_header("Authorization", "Basic %s" % base64string)  
+    urllib2.urlopen(request, data).read()
     return ''
