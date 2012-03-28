@@ -132,6 +132,6 @@ def set_dynamodb(key):
 
 @app.route('/mailbox/echo')
 def mailbox_echo():
-    msg = '{}\n{}\n{}\n---\n'.format(request.method, request.args, request.data)n
+    msg = '{}\n{}\n{}\n---\n'.format(request.method, request.args, request.data)
     open('~/data/echo', 'a').write(msg)
     return
