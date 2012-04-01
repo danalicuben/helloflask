@@ -149,6 +149,7 @@ def mailbox_echo():
     print 'Email:', r.text
 
     parts = subject.split()
+    print 'Parts:', parts
 
     if 'sms' in parts:
         twilio = TwilioRestClient(settings.TWILO_SID, TWILIO_AUTH)
