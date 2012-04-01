@@ -1,11 +1,14 @@
 import sys
 
 import requests
+from twilio.rest import TwilioRestClient
 from boto.dynamodb.exceptions import DynamoDBKeyNotFoundError
 from flask import url_for, request, render_template, Markup, abort
-from helloflask import app
 
+
+from helloflask import app
 import settings
+
 
 @app.before_request
 def before_request1():
@@ -133,14 +136,27 @@ def set_dynamodb(key):
 
 @app.route('/mailbox/echo', methods=['POST'])
 def mailbox_echo():
-    print 'ECHO:' , request.form.get('from'), request.form.get('stripped-text')
+    subject = request.form.get('subject')
+    from_ = request.form.get('from')
+    stripped_text = request.form.get('stripped-text')
+
     r = requests.post('https://api.mailgun.net/v2/helloflask.mailgun.org/messages',
-                       auth=('api', 'key-33v9xvf-91yyn2obk6q06m71z-e92oe2'),
+                       auth=('api', settings.MAILGUN_KEY),
                        data={'from': 'norepy <noreply@helloflask.mailgun.org>',
-                             'to': [request.form.get('from')],
-                             'subject': request.form.get('subject'),
-                             'text': request.form.get('stripped-text')
-                            }
-                      )
-    print r.text
+                             'to': [from_],
+                             'subject': subject,
+                             'text': stripped_text})
+    print 'Email:', r.text
+
+    parts = subject.split()
+
+    if 'sms' in parts:
+        twilio = TwilioRestClient(settings.TWILO_SID, TWILIO_AUTH)
+        sms = twilio.sms.messages.create(to=parts[-1],
+                                         from_='14254096111',
+                                         body=stripped_text[:160])
+
+        print 'SMS', sms.status
+
+
     return ''
