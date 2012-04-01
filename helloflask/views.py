@@ -149,14 +149,11 @@ def mailbox_echo():
     print 'Email:', r.text
 
     parts = subject.split()
-
     if 'sms' in parts:
-        twilio = TwilioRestClient(settings.TWILO_SID,settings.TWILIO_AUTH)
+        twilio = TwilioRestClient(settings.TWILIO_SID, settings.TWILIO_AUTH)
         sms = twilio.sms.messages.create(to=parts[-1],
                                          from_='14254096111',
                                          body=stripped_text[:160])
-
         print 'SMS', sms.status
-
 
     return ''
