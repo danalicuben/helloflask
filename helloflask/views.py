@@ -160,3 +160,9 @@ def mailbox_echo():
             print e
 
     return ''
+
+@app.route('/headers/accept')
+def best_match_accept():
+    mimetypes = request.accept_mimetypes
+    best = request.accept_mimetypes.best_match(['application/json', 'text/html'])
+    return render_template('accept.html', mimetypes=str(mimetypes))
